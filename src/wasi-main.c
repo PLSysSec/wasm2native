@@ -587,7 +587,7 @@ int main(int argc, const char** argv)
 
     uvwasi_preopen_t preopens[PREOPENS_COUNT];
     preopens[0].mapped_path = "/";
-    preopens[0].real_path = ".";
+    preopens[0].real_path = "/";
     preopens[1].mapped_path = "./";
     preopens[1].real_path = ".";
 
