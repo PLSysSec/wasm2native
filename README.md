@@ -2,6 +2,14 @@
 
 Turn WASI apps into native executables
 
+
+Modified for HFI.
+
+
+To build dependencies, run ./setup.sh
+
+
+
 ## How it works
 
 The approach is similar to [`WasmBoxC`](https://kripken.github.io/blog/wasm/2020/07/27/wasmboxc.html) or [`RLBox`](https://hacks.mozilla.org/2020/02/securing-firefox-with-webassembly/):
