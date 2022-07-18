@@ -3,9 +3,15 @@ export CC=${CC:="zig cc"}
 rm -f src/wasi-app.*
 
 wasm2c "$1" -o wasi-app.c
+
+if [ -n "${NOBOUND}" ]; then
+       ./remove-base.sh wasi-app.c
+       ./remove-base.sh wasi-app.h
+fi       
+
 mv wasi-app.* ./src
 
-OPT_FLAGS="-O3 -flto -fomit-frame-pointer -fno-stack-protector -march=native"
+OPT_FLAGS="-O3 -flto -fomit-frame-pointer -fno-stack-protector"
 SRCS="src/wasi-app.c src/wasi-main.c src/wasm-rt-impl.c"
 DEPS="-Ibuild/_deps/uvwasi-src/include -Lbuild/_deps/libuv-build -Lbuild/_deps/uvwasi-build -luvwasi_a -luv_a -lpthread -ldl -lm"
 
