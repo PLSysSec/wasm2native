@@ -1,10 +1,12 @@
-/* Link this with wasm2c and uvwasi runtime to build a standalone app */
+/* Link this with wasm2c output and uvwasi runtime to build a standalone app */
 #include <stdio.h>
 #include <stdlib.h>
 #include "uvwasi.h"
-#include "wasi-app.h"
 
 extern uvwasi_t uvwasi;
+
+extern void init();
+extern void (*(Z__startZ_vv))(void);
 
 int main(int argc, const char** argv)
 {
