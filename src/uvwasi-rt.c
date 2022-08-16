@@ -590,6 +590,3 @@ IMPORT_IMPL_WASI_ALL(void, Z_proc_exitZ_vi, (u32 code),
     uvwasi_destroy(&uvwasi);
     exit(code);
 });
-
-
-
