@@ -3,11 +3,29 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "wasi-app.h"
 #include "wasm-rt.h"
 #include "uvwasi.h"
 
+typedef uint8_t u8;
+typedef int8_t s8;
+typedef uint16_t u16;
+typedef int16_t s16;
+typedef uint32_t u32;
+typedef int32_t s32;
+typedef uint64_t u64;
+typedef int64_t s64;
+typedef float f32;
+typedef double f64;
+
 uvwasi_t uvwasi;
+
+#ifndef WASM_RT_MODULE_PREFIX
+#define WASM_RT_MODULE_PREFIX
+#endif
+
+#define WASM_RT_PASTE_(x, y) x ## y
+#define WASM_RT_PASTE(x, y) WASM_RT_PASTE_(x, y)
+#define WASM_RT_ADD_PREFIX(x) WASM_RT_PASTE(WASM_RT_MODULE_PREFIX, x)
 
 #define IMPORT_IMPL(ret, name, params, body)            \
   static ret _##name params body                        \
@@ -32,6 +50,9 @@ uvwasi_t uvwasi;
 #define READ32(x)   (*(u32*)(x))
 
 // XXX TODO: Add linear memory boundary checks
+
+//import linear memory memory
+extern wasm_rt_memory_t (*WASM_RT_ADD_PREFIX(Z_memory));
 
 typedef u32 wasm_ptr;
 
